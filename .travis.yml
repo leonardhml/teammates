@@ -5,7 +5,7 @@ notifications:
 
 before_cache:
   - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -f $HOME/.gradle/caches/2.11/scripts/build_*
+  - rm -rf $HOME/.gradle/caches/2.11/scripts/build_*
 
 env:
   - TEST_SUITE=src/test/testng-travis-parallel.xml
