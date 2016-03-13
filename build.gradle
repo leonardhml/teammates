@@ -164,7 +164,7 @@ appengineTest.dependsOn "test"
         finalizedBy = isLastRetry ? ["killFF${id+1}", "appengineStop"] : ["killFF${id+1}", "appengineStop${id+1}", "appengineRun${id+1}"]
         testLogging {
             events "passed"
-            exceptionFormat = "full"
+            exceptionFormat = isLastRetry ? "full" : "short"
             showStandardStreams = isLastRetry ? true : false
         }
     }
