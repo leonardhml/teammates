@@ -9,6 +9,7 @@ before_cache:
 
 env:
   - TEST_SUITE=src/test/testng-travis-parallel.xml
+  - TEST_SUITE=src/test/testng-travis-others.xml
 
 cache:
   directories:
@@ -16,8 +17,8 @@ cache:
     - $HOME/.gradle/wrapper/
     - $TRAVIS_BUILD_DIR/libs
 
-# addons:
-#   # firefox: "38.0.5"
+addons:
+  firefox: "38.0.5"
 #   apt:
 #     packages:
 #       - net-tools
@@ -30,8 +31,8 @@ before_install:
 
 before_script:
   - "export DISPLAY=:99.0"
-  # - tar -xjf /tmp/firefox-38.0.5.tar.bz2 --directory $TRAVIS_BUILD_DIR/
-  # - export PATH="$TRAVIS_BUILD_DIR/firefox:$PATH"
+  - tar -xjf /tmp/firefox-38.0.5.tar.bz2 --directory $TRAVIS_BUILD_DIR/
+  - export PATH="$TRAVIS_BUILD_DIR/firefox:$PATH"
   # - gem install gist
 
 install: true
