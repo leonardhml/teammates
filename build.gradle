@@ -134,6 +134,9 @@ test {
         // exceptionFormat = "full"
         // showStandardStreams = true
     }
+    onOutput { descriptor, event ->
+        logger.error("Test: " + descriptor + ", error: " + event.message)
+    }
     finalizedBy = ["killFF1", "appengineStop1", "appengineRun1"]
 }
 test.dependsOn "appengineEnhance"
