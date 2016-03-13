@@ -2,7 +2,7 @@ apply plugin: "war"
 apply plugin: "appengine"
 
 def appengineVersion = "1.9.27"
-def numOfTestRetries = 5
+def numOfTestRetries = 3
 
 buildscript {
     repositories {
@@ -131,11 +131,20 @@ test {
     reports.junitXml.enabled = false
     testLogging {
         events "passed"
-        // exceptionFormat = "full"
-        // showStandardStreams = true
     }
-    onOutput { descriptor, event ->
-        logger.error("Test: " + descriptor + ", error: " + event.message)
+    afterTest { descriptor, result ->
+        if (result.resultType == TestResult.ResultType.FAILURE && result.exception != null) {
+            def msg = result.exception.getMessage()
+            def shouldDiff = msg.indexOf("<<[expected>\n") != -1
+            if (shouldDiff) {
+                new File("expected").text = msg[(msg.indexOf("<<[expected>\n") + 13)..(msg.indexOf("\n</expected]>>") - 1)]
+                new File("actual").text = msg[(msg.indexOf("<<[actual>\n") + 11)..(msg.indexOf("\n</actual]>>") - 1)]
+                def process = 'diff expected actual'.execute()
+                println "Diff for " + descriptor.getClassName() + "." + descriptor.getName() + ":\n"
+                println process.getText()
+                process.waitFor()
+            }
+        }
     }
     finalizedBy = ["killFF1", "appengineStop1", "appengineRun1"]
 }
@@ -168,7 +177,20 @@ appengineTest.dependsOn "test"
         testLogging {
             events "passed"
             exceptionFormat = isLastRetry ? "full" : "short"
-            showStandardStreams = isLastRetry ? true : false
+        }
+        afterTest { descriptor, result ->
+            if (result.resultType == TestResult.ResultType.FAILURE && result.exception != null) {
+                def msg = result.exception.getMessage()
+                def shouldDiff = msg.indexOf("<<[expected>\n") != -1
+                if (shouldDiff) {
+                    new File("expected").text = msg[(msg.indexOf("<<[expected>\n") + 13)..(msg.indexOf("\n</expected]>>") - 1)]
+                    new File("actual").text = msg[(msg.indexOf("<<[actual>\n") + 11)..(msg.indexOf("\n</actual]>>") - 1)]
+                    def process = 'diff expected actual'.execute()
+                    println "Diff for " + descriptor.getClassName() + "." + descriptor.getName() + ":\n"
+                    println process.getText()
+                    process.waitFor()
+                }
+            }
         }
     }
     appengineTest.dependsOn "testRetry${id}"
