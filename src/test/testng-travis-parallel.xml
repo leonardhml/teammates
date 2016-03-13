@@ -29,9 +29,9 @@
             <class name="teammates.test.cases.ui.browsertests.InstructorEditStudentFeedbackPageUiTest" />
             <class name="teammates.test.cases.ui.browsertests.InstructorFeedbackEditPageUiTest" />
             <class name="teammates.test.cases.ui.browsertests.InstructorFeedbackEditCopyUiTest" />
-            <!-- <class name="teammates.test.cases.ui.browsertests.InstructorFeedbackPageUiTest" /> -->
-            <!-- <class name="teammates.test.cases.ui.browsertests.InstructorFeedbackResultsPageUiTest" /> -->
-            <class name="teammates.test.cases.ui.browsertests.InstructorFeedbackSubmitPageUiTest" /> 
+            <class name="teammates.test.cases.ui.browsertests.InstructorFeedbackPageUiTest" />
+            <class name="teammates.test.cases.ui.browsertests.InstructorFeedbackResultsPageUiTest" />
+            <class name="teammates.test.cases.ui.browsertests.InstructorFeedbackSubmitPageUiTest" />
             <class name="teammates.test.cases.ui.browsertests.InstructorFeedbackQuestionSubmitPageUiTest" />
             <!-- Image problem on Travis <class name="teammates.test.cases.ui.browsertests.InstructorStudentListPageUiTest" /> -->
             <class name="teammates.test.cases.ui.browsertests.InstructorStudentRecordsPageUiTest" />
@@ -51,4 +51,4 @@
             <class name="teammates.test.cases.ui.browsertests.AdminSearchPageUiTest" />
         </classes>
     </test>
-</suite> 
+</suite>

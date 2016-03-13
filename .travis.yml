@@ -38,4 +38,3 @@ install: true
 script:
   - ./gradlew
   # - gist out.txt
-  
