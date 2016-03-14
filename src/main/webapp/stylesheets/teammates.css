@@ -93,6 +93,7 @@ h2 {
 .gray {
     color: gray;
 }
+
 /*-----------------------------------------------------------------------------------------*/
 
 #header {
@@ -278,6 +279,7 @@ h2.subcaption {
 }
 
 .coreTeamPhotoCell{
+	vertical-align: middle; 
 	padding-left:35px;
 	padding-bottom:5px;
 }
